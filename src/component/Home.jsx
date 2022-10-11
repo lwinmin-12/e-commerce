@@ -12,7 +12,6 @@ const Home = ({ change, items , added,addedDelete}) => {
         {
               items.value.map((ea, index) => {
                   return <MainUi key={ea.id} added={added} each={ ea } index={index} change={change} addedDelete={addedDelete} />
-        
     })
 } 
           

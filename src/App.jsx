@@ -1,7 +1,7 @@
 import Navbar from "./component/Navbar";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Home from "./component/Home";
-import { createContext, useEffect, useState, } from "react";
+import { createContext, useEffect, useState,useRef } from "react";
 import SearchedItems from "./component/SearchedItems";
 import Swal from "sweetalert2";
 
@@ -46,12 +46,15 @@ function App() {
       });  
   },[])
   
-  
 
-    const plusHandle = (i,ogp) => {
+
+  const plusHandle = (i, ogp , delObj ) => {
         setTotal(total.map((ea ,index)=> index==i? ea+ogp : ea))
-     
-    }
+      //  console.log(delObj.current.childNodes)
+      delObj.current.childNodes.forEach((eachDiv,index) => {
+        eachDiv.id == i && console.log(eachDiv.childNodes[3].childNodes[1].childNodes[1].innerText)
+      })
+  }
     const minusHandle = (i,ogp) => {
         setTotal(total.map((ea, index) => {
             return index ==i && ea < ogp ? ea : ea-ogp
@@ -92,25 +95,41 @@ function App() {
   const changerHandle = (e,b) => {
     setAddItem((pre) => ([...pre, e]))
     setForAni(b)
-    setTotal((prev) =>[ ...prev,e.price])
+    setTotal((prev) => [...prev, e.price])
+    // const img = new Image();
+    
     setTimeout(() => {
       setForAni(false)
     },1500)
   }
   const addedDelete = (id) => {
-    setAddItem(addItem.filter((each) => each.id!= id))
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setAddItem(addItem.filter((each) => each.id!= id))
+      }
+    })
+   
   }
-  // console.log(total)
+  console.log(total)
   return <totalNum.Provider value={{
     total,
     plusHandle,
     minusHandle,
-    trashHandle
+    trashHandle,
   }}>
     <div className="relative overflow-hidden">
     <Navbar added={addItem} ani={forAni} searchingFunction={searchingFunction} selectFunction={selectFunction} />
-      
+      <div >
       {searchedItems.text.length > 0 ? <SearchedItems change={changerHandle} search={ searchedItems } added={addItem} addedDelete={addedDelete} />  : <Home items={items} change={changerHandle} added={addItem} addedDelete={addedDelete} /> }
+      </div>
      
     </div>
   </totalNum.Provider>
