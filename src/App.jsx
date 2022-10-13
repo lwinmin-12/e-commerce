@@ -1,14 +1,15 @@
 import Navbar from "./component/Navbar";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Home from "./component/Home";
-import { createContext, useEffect, useState,useRef } from "react";
+// import { createContext, useEffect, useState,useRef } from "react";
 import SearchedItems from "./component/SearchedItems";
-import Swal from "sweetalert2";
+import Collection from "./store/Collection";
+import { useContext } from "react";
+import { Colect } from "./store/Collection";
 
-export const totalNum = createContext();
+// export const totalNum = createContext();
 
 function App() {
-  const Swal = require('sweetalert2')
+  /* const Swal = require('sweetalert2')
   
   const [items, setItem] = useState({
     isLoading: false,
@@ -45,21 +46,15 @@ function App() {
         setItem((pre) => ({ ...pre, isLoading: false, error: e }));
       });  
   },[])
+
+  const plusHandle = (i, ogp ,delObj ) => {
+     
+    setTotal(total.map((each, index) => index == i ? {...each,price: each.price+ogp,selectedNum:each.selectedNum+1} : {...each,price:each.price} ))
   
-
-
-  const plusHandle = (i, ogp , delObj ) => {
-        setTotal(total.map((ea ,index)=> index==i? ea+ogp : ea))
-      //  console.log(delObj.current.childNodes)
-      delObj.current.childNodes.forEach((eachDiv,index) => {
-        eachDiv.id == i && console.log(eachDiv.childNodes[3].childNodes[1].childNodes[1].innerText)
-      })
   }
+
     const minusHandle = (i,ogp) => {
-        setTotal(total.map((ea, index) => {
-            return index ==i && ea < ogp ? ea : ea-ogp
-            
-        }))
+        // setTotal(total.map((each, index) => index ==i && each.selectedNum == 1 ? {price:each.price} : {price: each.price-ogp,selectedNum:each.selectedNum-1}  ))
     }
   
   
@@ -95,7 +90,7 @@ function App() {
   const changerHandle = (e,b) => {
     setAddItem((pre) => ([...pre, e]))
     setForAni(b)
-    setTotal((prev) => [...prev, e.price])
+    setTotal((prev) => [...prev, { price:e.price , selectedNum : 1 }])
     // const img = new Image();
     
     setTimeout(() => {
@@ -117,22 +112,34 @@ function App() {
       }
     })
    
-  }
-  console.log(total)
-  return <totalNum.Provider value={{
-    total,
-    plusHandle,
-    minusHandle,
-    trashHandle,
-  }}>
+  } */
+  const { searchedItems } = useContext(Colect);
+
+    console.log(searchedItems);
+  return <>
+    <Collection>
     <div className="relative overflow-hidden">
-    <Navbar added={addItem} ani={forAni} searchingFunction={searchingFunction} selectFunction={selectFunction} />
+      <Navbar/>
       <div >
-      {searchedItems.text.length > 0 ? <SearchedItems change={changerHandle} search={ searchedItems } added={addItem} addedDelete={addedDelete} />  : <Home items={items} change={changerHandle} added={addItem} addedDelete={addedDelete} /> }
+      {searchedItems.text.length > 0 ? <SearchedItems/>  : <Home/> }
       </div>
-     
     </div>
-  </totalNum.Provider>
+  </Collection>
+  </>
+  
+
 }
 
 export default App;
+
+// added={addItem} ani={forAni} searchingFunction={searchingFunction} selectFunction={selectFunction}
+// change={changerHandle} search={ searchedItems } added={addItem} addedDelete={addedDelete} 
+// items={items} change={changerHandle} added={addItem} addedDelete={addedDelete} 
+
+{/* <totalNum.Provider value={{
+  total,
+  plusHandle,
+  minusHandle,
+  trashHandle,
+}}>
+  </totalNum.Provider> */}

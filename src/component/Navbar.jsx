@@ -1,10 +1,11 @@
-import React, { useRef,useContext, useState } from 'react'
+import React, { useRef,useContext } from 'react'
 import { BsCart3 } from 'react-icons/bs'
 import AddedItem from './AddedItem'
+import { Colect } from "./store/Collection";
 
 
-const Navbar = ({ added, ani , searchingFunction, selectFunction}) => {
-  
+const Navbar = () => {
+  const { addItem,forAni,searchingFunction,selectFunction } = useContext(Colect)
   const search = useRef()
   const cart = useRef()
   const selectBox = useRef()
@@ -32,17 +33,19 @@ const Navbar = ({ added, ani , searchingFunction, selectFunction}) => {
         </select>
 
         <div className='relative '>
-          <p className='absolute  top-[5px] z-[1500] right-0 w-5 h-5 text-center bg-red-600 rounded-full pt-[1px] text-sm text-stone-50'>{ added.length}</p>
-          <button ref={cart} onClick={seeCart} className={`${ani==true&& 'animate__heartBeat'} animate__animated btn mx-2  my-2 hover:after:scale[7] after:-left-[25px] after:-bottom-[40px]`}>
+          <p className='absolute  top-[5px] z-[1500] right-0 w-5 h-5 text-center bg-red-600 rounded-full pt-[1px] text-sm text-stone-50'>{ addItem.length}</p>
+          <button ref={cart} onClick={seeCart} className={`${forAni==true&& 'animate__heartBeat'} animate__animated btn mx-2  my-2 hover:after:scale[7] after:-left-[25px] after:-bottom-[40px]`}>
             <BsCart3 />
             </button>
         </div> 
       </div>      
     </div>
-    <AddedItem added={added} />
+    <AddedItem  />
   </>
       
 
 }
 
 export default Navbar
+
+// added={added}

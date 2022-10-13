@@ -1,9 +1,9 @@
 import React, { useRef} from 'react'
 import MainUi from '../Ui/MainUi'
-
-
-const Home = ({ change, items , added,addedDelete}) => {
-    
+import { Colect } from "./store/Collection";
+import { useContext } from 'react';
+const Home = () => {
+    const {items} = useContext(Colect)
     const containerDiv = useRef()
 
     return (<>
@@ -11,7 +11,7 @@ const Home = ({ change, items , added,addedDelete}) => {
         <div ref={containerDiv} className='w-[90%] h-[min-100vh] flex flex-wrap justify-around  p-5 mx-auto '>
         {
               items.value.map((ea, index) => {
-                  return <MainUi key={ea.id} added={added} each={ ea } index={index} change={change} addedDelete={addedDelete} />
+                  return <MainUi key={ea.id} each={ea} index={index} />
     })
 } 
           
@@ -22,5 +22,7 @@ const Home = ({ change, items , added,addedDelete}) => {
 }
 
 export default Home
+
+// added={added} each={ ea } index={index} change={change} addedDelete={addedDelete}
 
 
