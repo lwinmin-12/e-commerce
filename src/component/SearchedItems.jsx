@@ -1,6 +1,6 @@
 import React from 'react'
 import MainUi from '../Ui/MainUi'
-import { Colect } from "./store/Collection";
+import {Colect} from "../store/Collection";
 import { useContext } from 'react';
 const SearchedItems = () => { 
     const {    searchedItems    } = useContext(Colect)

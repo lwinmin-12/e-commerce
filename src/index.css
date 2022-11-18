@@ -8,7 +8,7 @@
 
 @layer components{
     .btn{
-        @apply px-4 py-2 z-10 overflow-hidden after:duration-300 rounded border-2 border-violet-600 text-violet-600 hover:text-white after:w-[45%] after:h-[110%] after:bg-violet-600 relative after:absolute after:rounded-[50px] after:-bottom-[45px] after:-left-[30px] hover:after:scale-[6] after:-z-[1] active:after:bg-white active:text-violet-600 hover:outline-none;
+        @apply px-5 py-2 text-[15px] z-10 overflow-hidden after:duration-300 rounded border-2 border-violet-600 text-violet-600 hover:text-white after:w-[45%] after:h-[110%] after:bg-violet-600 relative after:absolute after:rounded-[50px] after:-bottom-[45px] after:-left-[30px] hover:after:scale-[6] after:-z-[1] active:after:bg-white active:text-violet-600 hover:outline-none;
     }
     .addImage{
         @apply w-[20%] absolute top-0 bg-red-600
@@ -26,3 +26,9 @@
 #padding{
     padding: 0px;
 }
+.added{
+    background-color: red;
+}
+.swal2-container {
+    z-index: 2000 !important;
+  }

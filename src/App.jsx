@@ -1,16 +1,14 @@
-import Navbar from "./component/Navbar";
-import Home from "./component/Home";
-// import { createContext, useEffect, useState,useRef } from "react";
-import SearchedItems from "./component/SearchedItems";
 import Collection from "./store/Collection";
-import { useContext } from "react";
-import { Colect } from "./store/Collection";
+import {Colect} from "./store/Collection";
+import Container from "./Container";
 
 // export const totalNum = createContext();
+// const { searchedItems } = useContext(Colect);
+
 
 function App() {
   /* const Swal = require('sweetalert2')
-  
+
   const [items, setItem] = useState({
     isLoading: false,
     value: [],
@@ -21,7 +19,7 @@ function App() {
   const [forAni, setForAni] = useState(false);
   const [total, setTotal] = useState([]);
   const [searchedItems,setSearchedItems] = useState({value:[],text:''})
-  
+
   const searchingFunction = (search) => {
     setSearchedItems(()=>({value:items.value.filter(element => {
       return element.title.toLowerCase().includes(search.current.value.toLowerCase())
@@ -32,7 +30,7 @@ function App() {
       return element.category.toLowerCase().includes(search.current.value.toLowerCase())
     }),text:search.current.value}))
   }
-    
+
   useEffect(() => {
     setItem((prev)=>({...prev,isLoading:true}))
     fetch('https://fakestoreapi.com/products')
@@ -44,20 +42,20 @@ function App() {
       }))
       .catch((e) => {
         setItem((pre) => ({ ...pre, isLoading: false, error: e }));
-      });  
+      });
   },[])
 
   const plusHandle = (i, ogp ,delObj ) => {
-     
+
     setTotal(total.map((each, index) => index == i ? {...each,price: each.price+ogp,selectedNum:each.selectedNum+1} : {...each,price:each.price} ))
-  
+
   }
 
     const minusHandle = (i,ogp) => {
         // setTotal(total.map((each, index) => index ==i && each.selectedNum == 1 ? {price:each.price} : {price: each.price-ogp,selectedNum:each.selectedNum-1}  ))
     }
-  
-  
+
+
     const trashHandle = (delItemId,delObj,index) => {
       // delObj.current.childNodes.forEach((eachDiv) => {
       //   eachDiv.id == index && eachDiv.classList.add('animate__rotateOutDownLeft')
@@ -92,7 +90,7 @@ function App() {
     setForAni(b)
     setTotal((prev) => [...prev, { price:e.price , selectedNum : 1 }])
     // const img = new Image();
-    
+
     setTimeout(() => {
       setForAni(false)
     },1500)
@@ -111,19 +109,15 @@ function App() {
         setAddItem(addItem.filter((each) => each.id!= id))
       }
     })
-   
-  } */
-  const { searchedItems } = useContext(Colect);
 
-    console.log(searchedItems);
+  } */
+
+    // console.log(searchedItems);
+  // const {    items    } = useContext(Colect)
+
   return <>
     <Collection>
-    <div className="relative overflow-hidden">
-      <Navbar/>
-      <div >
-      {searchedItems.text.length > 0 ? <SearchedItems/>  : <Home/> }
-      </div>
-    </div>
+    <Container/>
   </Collection>
   </>
   

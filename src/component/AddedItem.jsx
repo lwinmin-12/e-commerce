@@ -1,7 +1,7 @@
 import React, { useContext,  useRef } from 'react'
 import { BsPlusLg , BsTrash} from 'react-icons/bs'
 import {v4 as uuidv4 } from 'uuid'
-import { Colect } from "./store/Collection";
+import {Colect} from "../store/Collection";
 
 const AddedItem = () => {
     const {total,plusHandle,minusHandle,trashHandle,addItem} = useContext(Colect)
@@ -13,16 +13,18 @@ const AddedItem = () => {
 
     const plus = (i) => {
         const img = new Image()
-        console.log(img)
         img.src = addItem[i].image
         img.classList.add('added')
-        delObject.current.childNodes[i].append(img)
-        // console.log(delObject.current.childNodes[i])
-        return delObject.current.childNodes[i]
+         delObject.current.childNodes.forEach(ea => {
+            if (ea.id == i){
+                return ea.append(img)
+            }
+        })
+      console.log(delObject)
     }
 
     return (
-    <div id='sld' className='translate-x-[100%] space-y-5 overflow-scroll overflow-x-hidden shadow-lg duration-300 fixed top-0 right-0 w-[25%] h-[100vh] z-[1500] bg-white'>
+    <div id='sld' className='translate-x-[100%] space-y-5 overflow-scroll overflow-x-hidden shadow-lg duration-300 fixed top-0 right-0 sm:w-[50%] lg:w-[25%] h-[100vh] z-[1500] bg-white'>
         <div className='flex w-[90%] mx-auto mt-2 text-2xl justify-between items-center'>
                 <p className='flex items-center'>Short Card
                     <span className='text-base mx-1 bg-violet-500 px-2 text-white rounded'>{addItem.length}</span>
@@ -62,15 +64,16 @@ const AddedItem = () => {
                 }
                 
             </div>
-            <div className='fixed bottom-0 w-[25%] z-50 shadow-lg sha py-2 px-5 bg-white'>
-                <div className='flex justify-between mb-5'>
-                    <p>total</p>
-                    <p>
+            
+            <div className='fixed bottom-0 md:w-[30%] sm:w-[25%] lg:w-[25%] w-[100%] z-50 shadow-lg sha py-2 px-5 bg-white'>
+                <div className='flex justify-between mb-5 font-medium text-[21px]'>
+                    <p >Total</p>
+                    <p > $ 
                         {total.length != 0 ? total.map(ea=>ea.price).reduce((pv,cv)=> pv+cv).toFixed(2): 0 }
                     </p>
                 </div>
                 <div className='flex justify-center'>
-                <button className='btn'>Check Out</button>
+                <button className='btn w-full'>Check Out</button>
                 </div>
             </div>
     </div>

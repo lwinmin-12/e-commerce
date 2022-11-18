@@ -48,8 +48,8 @@ const Collection = ({ children }) => {
   }
 
 
-    const minusHandle = (i,ogp) => {
-        // setTotal(total.map((each, index) => index ==i && each.selectedNum == 1 ? {price:each.price} : {price: each.price-ogp,selectedNum:each.selectedNum-1}  ))
+  const minusHandle = (i, ogp) => {
+    setTotal(total.map((each, index, prev) => index == i && each.selectedNum != 1 ? {price: each.price-ogp,selectedNum:each.selectedNum-1}  :  { ...prev, price: each.price, selectedNum: 1 } ))
     }
   
     const trashHandle = (delItemId,delObj,index) => {
@@ -85,6 +85,7 @@ const Collection = ({ children }) => {
       setForAni(b)
       setTotal((prev) => [...prev, { price:e.price , selectedNum : 1 }])
       // const img = new Image();
+      // console.log("here")
       
       setTimeout(() => {
         setForAni(false)
@@ -98,7 +99,7 @@ const Collection = ({ children }) => {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Yes, remove it!'
       }).then((result) => {
         if (result.isConfirmed) {
           setAddItem(addItem.filter((each) => each.id!= id))
